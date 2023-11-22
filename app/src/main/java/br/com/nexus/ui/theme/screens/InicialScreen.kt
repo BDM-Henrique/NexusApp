@@ -17,7 +17,7 @@ import br.com.nexus.ui.theme.components.SelecaoProduto
 import java.math.BigDecimal
 
 @Composable
-fun InicialScreen(){
+fun InicialScreen() {
     Column(
         Modifier
             .fillMaxSize()
@@ -25,17 +25,23 @@ fun InicialScreen(){
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Spacer(Modifier)
-        SelecaoProduto("Ofertas", sampleProdutos)
-        SelecaoProduto("Doces", listOf(Produto(name = "Chocolate",
-            price = BigDecimal("5.99"),
-            image = R.drawable.placeholder)))
-        SelecaoProduto("Bebidas", sampleProdutos)
+        SelecaoProduto(title = "Ofertas", sampleProdutos)
+        SelecaoProduto(
+            title = "Doces", listOf(
+                Produto(
+                    name = "Chocolate",
+                    price = BigDecimal("5.99"),
+                    image = R.drawable.placeholder
+                )
+            )
+        )
+        SelecaoProduto(title = "Bebidas", sampleProdutos)
         Spacer(Modifier)
     }
 }
 
 @Preview(showSystemUi = true)
 @Composable
-fun InicialScreenPreview(){
+fun InicialScreenPreview() {
     InicialScreen()
 }

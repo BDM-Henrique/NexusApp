@@ -24,7 +24,7 @@ import java.math.BigDecimal
 fun SelecaoProduto(title: String, produtos: List<Produto>) {
     Column {
         Text(
-            text = "Ofertas",
+            text = title,
             Modifier.padding(
                 start = 16.dp,
                 end = 16.dp
@@ -55,6 +55,5 @@ fun SelecaoProduto(title: String, produtos: List<Produto>) {
 @Composable
 private fun SelecaoProdutoPreview() {
     SelecaoProduto("Ofertas", produtos = sampleProdutos)
-
 }
 
