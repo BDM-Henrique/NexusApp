@@ -46,12 +46,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.nexus.extensions.toBrazilianCurrency
 import br.com.nexus.model.Produto
+import br.com.nexus.sampledata.sampleSections
 import br.com.nexus.ui.theme.NexusTheme
 import br.com.nexus.ui.theme.Purple500
 import br.com.nexus.ui.theme.Teal200
 import br.com.nexus.ui.theme.components.SelecaoProduto
 import br.com.nexus.ui.theme.screens.InicialScreen
 import java.math.BigDecimal
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,63 +68,9 @@ class MainActivity : ComponentActivity() {
 fun App() {
     NexusTheme {
         Surface {
-            InicialScreen()
+            InicialScreen(
+                sampleSections
+            )
         }
     }
 }
-
-@Composable
-fun ProdutoItens(produto: Produto) {
-    Surface(
-        shape = RoundedCornerShape(15.dp),
-        tonalElevation = 4.dp
-    ) {
-        Column(
-            Modifier
-                .heightIn(250.dp, 300.dp)
-                .width(200.dp)
-        ) {
-            val imageTamanho = 100.dp
-            Box(
-                modifier = Modifier
-                    .height(imageTamanho)
-                    .background(
-                        brush = Brush.horizontalGradient(
-                            colors = listOf(
-                                Purple500, Teal200
-                            )
-                        )
-                    )
-                    .fillMaxWidth()
-            ) {
-                Image(
-                    painter = painterResource(id = produto.image),
-                    contentDescription = null,
-                    Modifier
-                        .size(imageTamanho)
-                        .offset(y = imageTamanho / 2)
-                        .clip(shape = CircleShape)
-                        .align(BottomCenter),
-                    contentScale = ContentScale.Crop
-                )
-            }
-            Spacer(modifier = Modifier.height(imageTamanho / 2))
-            Column(Modifier.padding(16.dp)) {
-                Text(
-                    text = produto.name,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight(700),
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
-                )
-                Text(
-                    text = produto.price.toBrazilianCurrency(),
-                    Modifier.padding(top = 8.dp),
-                    fontSize = 14.sp,
-                    fontWeight = FontWeight(400)
-                )
-            }
-        }
-    }
-}
-

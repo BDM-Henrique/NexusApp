@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "br.com.nexus"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "br.com.nexus"
@@ -48,7 +48,7 @@ android {
 
 dependencies {
 
-    implementation("io.coil-kt:coil-compose:2.2.0")
+    implementation("io.coil-kt:coil-compose:2.5.0")
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")

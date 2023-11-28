@@ -1,6 +1,5 @@
 package br.com.nexus.ui.theme.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,6 +31,7 @@ import androidx.compose.ui.unit.sp
 import br.com.nexus.R
 import br.com.nexus.extensions.toBrazilianCurrency
 import br.com.nexus.model.Produto
+import br.com.nexus.ui.theme.NexusTheme
 import br.com.nexus.ui.theme.Purple500
 import br.com.nexus.ui.theme.Teal200
 import coil.compose.AsyncImage
@@ -96,11 +96,14 @@ fun ProdutoItens(produto: Produto) {
 @Preview(showBackground = true)
 @Composable
 private fun ProdutoPreview() {
-    br.com.nexus.ProdutoItens(
-        Produto(
-            name = LoremIpsum(50).values.first(),
-            price = BigDecimal("14.99"),
-            image = R.drawable.placeholder
-        )
-    )
+    NexusTheme {
+        Surface {
+            ProdutoItens(
+                Produto(
+                    name = LoremIpsum(50).values.first(),
+                    price = BigDecimal("14.99")
+                )
+            )
+        }
+    }
 }
