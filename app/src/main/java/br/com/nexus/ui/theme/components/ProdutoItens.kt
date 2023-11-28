@@ -34,6 +34,7 @@ import br.com.nexus.extensions.toBrazilianCurrency
 import br.com.nexus.model.Produto
 import br.com.nexus.ui.theme.Purple500
 import br.com.nexus.ui.theme.Teal200
+import coil.compose.AsyncImage
 import java.math.BigDecimal
 
 @Composable
@@ -60,15 +61,16 @@ fun ProdutoItens(produto: Produto) {
                     )
                     .fillMaxWidth()
             ) {
-                Image(
-                    painter = painterResource(id = produto.image),
+                AsyncImage(
+                    model = produto.image,
                     contentDescription = null,
                     Modifier
                         .size(imageTamanho)
                         .offset(y = imageTamanho / 2)
                         .clip(shape = CircleShape)
                         .align(Alignment.BottomCenter),
-                    contentScale = ContentScale.Crop
+                    contentScale = ContentScale.Crop,
+                    placeholder = painterResource(id = R.drawable.placeholder)
                 )
             }
             Spacer(modifier = Modifier.height(imageTamanho / 2))
