@@ -26,9 +26,12 @@ import br.com.nexus.ui.theme.NexusTheme
 import java.math.BigDecimal
 
 @Composable
-fun SelecaoProduto(title: String,
-                   produtos: List<Produto>) {
-    Column {
+fun SelecaoProduto(
+    title: String,
+    produtos: List<Produto>,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier) {
         Text(
             text = title,
             Modifier.padding(

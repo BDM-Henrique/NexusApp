@@ -38,10 +38,14 @@ import coil.compose.AsyncImage
 import java.math.BigDecimal
 
 @Composable
-fun ProdutoItens(produto: Produto) {
+fun ProdutoItens(
+    produto: Produto,
+    modifier: Modifier = Modifier,
+) {
     Surface(
-        shape = RoundedCornerShape(15.dp),
-        tonalElevation = 4.dp
+        modifier,
+            shape = RoundedCornerShape(15.dp),
+            tonalElevation = 4.dp
     ) {
         Column(
             Modifier

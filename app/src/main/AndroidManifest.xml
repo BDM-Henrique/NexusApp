@@ -16,10 +16,13 @@
         android:theme="@style/Theme.Nexus"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.theme.activities.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Nexus">
+        </activity>
+        <activity android:name=".ui.theme.activities.AtividadeDeFormularioActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

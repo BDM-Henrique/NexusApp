@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
+import androidx.compose.material3.CardElevation
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -12,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import br.com.nexus.R
@@ -21,18 +23,21 @@ import br.com.nexus.sampledata.sampleProduto
 import coil.compose.AsyncImage
 import br.com.nexus.ui.theme.NexusTheme
 import br.com.nexus.ui.theme.components.SelecaoProduto
+import java.math.BigDecimal
 
 @Composable
 fun CartaoProdutoItem(
     produto: Produto,
-    elevation: Dp = 4.dp
+    modifier: Modifier = Modifier,
+    tonalElevation: Dp = 4.dp
 ) {
     Card(
-        Modifier
+        modifier
             .fillMaxWidth()
-            .heightIn(150.dp),
-        elevation = elevation
-    ) {
+            .heightIn(),
+
+        )
+    {
         Column {
             AsyncImage(
                 model = produto.image,
@@ -56,24 +61,42 @@ fun CartaoProdutoItem(
                     text = produto.price.toBrazilianCurrency()
                 )
             }
-            // TODO: adicionar descrição do produto
-            // Text(
-            //     text = product.description,
-            //     Modifier
-            //         .padding(16.dp)
-            // )
+            produto.description?.let {
+                Text(
+                    text = produto.description,
+                    Modifier
+                        .padding(16.dp)
+                )
+            }
         }
     }
 }
 
 @Preview
 @Composable
-private fun CartaoProdutoItem() {
+private fun CartaoProdutoItemPreview() {
     NexusTheme {
         Surface {
             CartaoProdutoItem(
-                produto = sampleProduto.random()
+                produto =  Produto(
+                    name = "teste",
+                    price = BigDecimal("9.99")
+                )
             )
+        }
+    }
+}
+
+@Preview
+@Composable
+fun CartaoProdutoItemWithDescription(){
+    NexusTheme {
+        Surface {
+            CartaoProdutoItem(produto = Produto(
+                    "teste",
+                    BigDecimal("9.99"),
+                    description = LoremIpsum(50).values.first(),
+                ))
         }
     }
 }
