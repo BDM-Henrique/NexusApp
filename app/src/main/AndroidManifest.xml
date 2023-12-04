@@ -19,16 +19,17 @@
             android:name=".ui.theme.activities.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Nexus">
-        </activity>
-        <activity android:name=".ui.theme.activities.AtividadeDeFormularioActivity"
-            android:exported="true">
+            android:theme="@style/Theme.Nexus"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.theme.activities.AtividadeDeFormularioActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize"/>
     </application>
 
 </manifest>

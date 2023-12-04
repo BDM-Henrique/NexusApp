@@ -27,34 +27,57 @@ import br.com.nexus.ui.theme.components.CampoDePesquisa
 import br.com.nexus.ui.theme.components.SelecaoProduto
 
 
+class InicialScreenUiState(
+    val sections: Map<String, List<Produto>> = emptyMap(),
+    private val produtos: List<Produto> = emptyList(),
+    searchText: String = ""
+) {
+
+    var text by mutableStateOf(searchText)
+        private set
+    val searchProduto
+        get() =
+            if (text.isNotBlank()) {
+                sampleProduto.filter(containsInNameOrDescription()) +
+                        produtos.filter(containsInNameOrDescription())
+            } else emptyList()
+
+    private fun containsInNameOrDescription() = { produto: Produto ->
+        produto.name.contains(
+            text,
+            ignoreCase = true,
+        ) ||
+                produto.description?.contains(
+                    text,
+                    ignoreCase = true,
+                ) ?: false
+    }
+    fun isShowSection(): Boolean {
+        return text.isBlank()
+    }
+
+    val onSearchChange: (String) -> Unit = { searchText ->
+        text = searchText
+    }
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun InicialScreen(
-    sections: Map<String, List<Produto>>,
-    searchText: String = ""
+    state: InicialScreenUiState = InicialScreenUiState()
 ) {
     Column {
-        var text by remember {
-            mutableStateOf(searchText)
+        val sections = state.sections
+        val text = state.text
+        val searchProduto = remember(text) {
+            state.searchProduto
         }
         CampoDePesquisa(
             searchText = text,
-            onSearchChange = { text = it },
-        )
-        val searchProduto = remember(text) {
-            if (text.isNotBlank()) {
-                sampleProduto.filter { produto ->
-                    produto.name.contains(
-                        text,
-                        ignoreCase = true,
-                    ) ||
-                            produto.description?.contains(
-                                text,
-                                ignoreCase = true,
-                            ) ?: false
-                }
-            } else emptyList()
-        }
+            onSearchChange = state.onSearchChange,
+
+            )
+
         LazyColumn(
             Modifier
                 .fillMaxSize(),
@@ -64,7 +87,7 @@ fun InicialScreen(
             item {
                 Spacer(Modifier)
             }
-            if (text.isBlank()) {
+            if (state.isShowSection()) {
                 for (section in sections) {
                     val title = section.key
                     val produto = section.value
@@ -92,7 +115,7 @@ fun InicialScreen(
 private fun InicialScreenPreview() {
     NexusTheme {
         Surface {
-            InicialScreen(sampleSections)
+            InicialScreen(InicialScreenUiState(sections = sampleSections))
         }
     }
 }
@@ -103,8 +126,7 @@ fun InicialScreenWithSearchTextPreview() {
     NexusTheme {
         Surface {
             InicialScreen(
-                sampleSections,
-                searchText = "pizza",
+                state = InicialScreenUiState(searchText = "a", sections = sampleSections),
             )
         }
     }
