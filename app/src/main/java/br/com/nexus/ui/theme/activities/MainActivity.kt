@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import br.com.nexus.dao.ProdutoDao
 import br.com.nexus.sampledata.sampleCandies
 import br.com.nexus.sampledata.sampleDrinks
+import br.com.nexus.sampledata.sampleProduto
 import br.com.nexus.sampledata.sampleSections
 import br.com.nexus.ui.theme.NexusTheme
 import br.com.nexus.ui.theme.components.ProdutoItens
@@ -40,7 +41,7 @@ class MainActivity : ComponentActivity() {
             }){
                 val produtos = dao.produtos()
                 val sections = mapOf(
-                    "Todos produtos" to produtos,
+                    "Todos produtos" to sampleProduto,
                     "Ofertas" to sampleDrinks + sampleCandies,
                     "Doces" to sampleCandies,
                     "Bebidas" to sampleDrinks
